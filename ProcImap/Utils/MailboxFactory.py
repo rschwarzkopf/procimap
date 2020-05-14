@@ -28,6 +28,7 @@
 
 import mailbox
 import sys
+import getpass
 
 if sys.version_info > (3, 0):
     from configparser import ConfigParser
@@ -214,6 +215,8 @@ def imap_pathgenerator(optionsdict):
         serveraddress = optionsdict['server']
         username = optionsdict['username']
         password = optionsdict['password']
+        if password == '*':
+            password = getpass.getpass()
         ssl = True
         if optionsdict.has_key('ssl'):
             if optionsdict['ssl'].lower() in ['0', 'false', 'no']:
